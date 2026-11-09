@@ -95,24 +95,20 @@ export function WorkspaceApp() {
               size="icon"
               aria-label={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
               title={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
-              className="size-9 shrink-0 bg-card"
-              onClick={() => {
-                if (window.matchMedia("(min-width: 768px)").matches) {
-                  setSidebarVisible((visible) => !visible);
-                } else {
-                  setMobileNavOpen(true);
-                }
-              }}
+              className="hidden size-9 shrink-0 bg-card md:inline-flex"
+              onClick={() => setSidebarVisible((visible) => !visible)}
             >
-              <PanelLeftClose aria-hidden="true" className="hidden size-4 md:block" />
-              <PanelLeftOpen aria-hidden="true" className="hidden size-4 md:block" />
-              <Menu aria-hidden="true" className="size-4 md:hidden" />
+              {sidebarVisible ? (
+                <PanelLeftClose aria-hidden="true" className="size-4" />
+              ) : (
+                <PanelLeftOpen aria-hidden="true" className="size-4" />
+              )}
             </Button>
             <Button
               variant="outline"
               size="icon"
               aria-label="Open pages navigation"
-              className="hidden size-9 bg-card"
+              className="size-9 bg-card md:hidden"
               onClick={() => setMobileNavOpen(true)}
             >
               <Menu aria-hidden="true" className="size-4" />
