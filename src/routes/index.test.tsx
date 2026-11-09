@@ -12,9 +12,14 @@ describe("Booking Holdings workspace navigation", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Hide pages navigation" }));
     expect(navigation.parentElement).toHaveClass("md:hidden");
+    expect(screen.getByText("BOOKING HOLDINGS")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Log In" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Sign Up/ })).toBeInTheDocument();
+    expect(screen.getByText("Enterprise Workspace")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Show pages navigation" }));
     expect(navigation.parentElement).not.toHaveClass("md:hidden");
+    expect(screen.queryByText("BOOKING HOLDINGS")).not.toBeInTheDocument();
   });
 
   it("starts on Page 1 and switches among all five blank workspaces without leaving the page", () => {
