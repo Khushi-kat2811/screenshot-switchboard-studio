@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Index() {
+export function WorkspaceApp() {
   const [selectedPage, setSelectedPage] = useState(1);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -108,4 +108,8 @@ function Index() {
       </div>
     </main>
   );
+}
+
+function Index() {
+  return <WorkspaceApp />;
 }
