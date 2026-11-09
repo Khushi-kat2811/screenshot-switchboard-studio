@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, ChevronDown, Command, Grid2X2, Menu } from "lucide-react";
+import { ArrowRight, ChevronDown, Command, Grid2X2, Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -20,6 +20,7 @@ export const Route = createFileRoute("/")({
 export function WorkspaceApp() {
   const [selectedPage, setSelectedPage] = useState(1);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
 
   return (
     <main className="min-h-screen bg-background">
@@ -47,7 +48,7 @@ export function WorkspaceApp() {
       </header>
 
       <div className="flex min-h-screen pt-[68px]">
-        <aside className={`${mobileNavOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-[68px] left-0 z-20 w-[260px] border-r border-border bg-card transition-transform duration-200 md:sticky md:top-[68px] md:h-[calc(100vh-68px)] md:w-[260px] md:translate-x-0`}>
+        <aside className={`${mobileNavOpen ? "translate-x-0" : "-translate-x-full"} ${sidebarVisible ? "" : "md:hidden"} fixed inset-y-[68px] left-0 z-20 w-[260px] border-r border-border bg-card transition-transform duration-200 md:sticky md:top-[68px] md:h-[calc(100vh-68px)] md:w-[260px] md:translate-x-0`}>
           <div className="px-5 pb-3 pt-7">
             <p className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground">PAGES NAVIGATION</p>
           </div>
@@ -92,8 +93,26 @@ export function WorkspaceApp() {
             <Button
               variant="outline"
               size="icon"
+              aria-label={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
+              title={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
+              className="size-9 shrink-0 bg-card"
+              onClick={() => {
+                if (window.matchMedia("(min-width: 768px)").matches) {
+                  setSidebarVisible((visible) => !visible);
+                } else {
+                  setMobileNavOpen(true);
+                }
+              }}
+            >
+              <PanelLeftClose aria-hidden="true" className="hidden size-4 md:block" />
+              <PanelLeftOpen aria-hidden="true" className="hidden size-4 md:block" />
+              <Menu aria-hidden="true" className="size-4 md:hidden" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
               aria-label="Open pages navigation"
-              className="size-9 bg-card md:hidden"
+              className="hidden size-9 bg-card"
               onClick={() => setMobileNavOpen(true)}
             >
               <Menu aria-hidden="true" className="size-4" />

@@ -4,6 +4,19 @@ import { describe, expect, it } from "vitest";
 import { WorkspaceApp } from "@/routes/index";
 
 describe("Booking Holdings workspace navigation", () => {
+  it("lets the user hide and show the pages navigation", () => {
+    render(<WorkspaceApp />);
+
+    const navigation = screen.getByRole("navigation", { name: "Pages navigation" });
+    expect(navigation).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hide pages navigation" }));
+    expect(navigation.parentElement).toHaveClass("md:hidden");
+
+    fireEvent.click(screen.getByRole("button", { name: "Show pages navigation" }));
+    expect(navigation.parentElement).not.toHaveClass("md:hidden");
+  });
+
   it("starts on Page 1 and switches among all five blank workspaces without leaving the page", () => {
     render(<WorkspaceApp />);
 
