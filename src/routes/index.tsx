@@ -25,6 +25,29 @@ export function WorkspaceApp() {
   return (
     <main className="min-h-screen bg-background">
       <header className="fixed inset-x-0 top-0 z-30 flex h-[68px] items-center border-b border-border bg-card px-5 md:px-8">
+        <Button
+          variant="outline"
+          size="icon"
+          aria-label={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
+          title={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
+          className="mr-3 hidden size-9 shrink-0 bg-card md:inline-flex"
+          onClick={() => setSidebarVisible((visible) => !visible)}
+        >
+          {sidebarVisible ? (
+            <PanelLeftClose aria-hidden="true" className="size-4" />
+          ) : (
+            <PanelLeftOpen aria-hidden="true" className="size-4" />
+          )}
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          aria-label="Open pages navigation"
+          className="mr-3 size-9 shrink-0 bg-card md:hidden"
+          onClick={() => setMobileNavOpen(true)}
+        >
+          <Menu aria-hidden="true" className="size-4" />
+        </Button>
         <div className="flex min-w-0 items-center gap-3">
           <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
             <Command aria-hidden="true" className="size-[19px]" strokeWidth={2.5} />
@@ -35,9 +58,9 @@ export function WorkspaceApp() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-2.5 md:flex">
+        {!sidebarVisible && <div className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-2.5 md:flex">
           <span className="text-[13px] font-bold tracking-[0.08em] text-foreground">BOOKING HOLDINGS</span>
-        </div>
+        </div>}
 
         <div className="ml-auto flex items-center gap-2">
           <Button variant="ghost" size="sm" className="h-9 px-3 text-[13px] font-medium text-secondary-foreground">Log In</Button>
@@ -90,29 +113,6 @@ export function WorkspaceApp() {
 
         <section className="min-w-0 flex-1 px-5 pb-8 pt-6 md:px-8 md:pt-7">
           <div className="mb-5 flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
-              title={sidebarVisible ? "Hide pages navigation" : "Show pages navigation"}
-              className="hidden size-9 shrink-0 bg-card md:inline-flex"
-              onClick={() => setSidebarVisible((visible) => !visible)}
-            >
-              {sidebarVisible ? (
-                <PanelLeftClose aria-hidden="true" className="size-4" />
-              ) : (
-                <PanelLeftOpen aria-hidden="true" className="size-4" />
-              )}
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="Open pages navigation"
-              className="size-9 bg-card md:hidden"
-              onClick={() => setMobileNavOpen(true)}
-            >
-              <Menu aria-hidden="true" className="size-4" />
-            </Button>
             <div>
               <p className="mb-1 text-[10px] font-medium tracking-[0.08em] text-muted-foreground md:hidden">WORKSPACE</p>
               <h1 className="text-[20px] font-semibold leading-7 text-foreground">Page {selectedPage}</h1>
