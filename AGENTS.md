@@ -32,3 +32,4 @@ use the editor.
 ## Workspace architecture
 
 - Keep the five blank workspace pages as client-side React state in the TanStack home route; they share one layout and need no persisted page data.
+- Keep login and signup as top-level TanStack routes; use a browser-side adapter for the user's existing FastAPI authentication API rather than adding a competing backend to this frontend project.
