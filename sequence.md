@@ -155,7 +155,7 @@ sequenceDiagram
             V-->>B: [] → keep as candidate
         end
     end
-    B->>SEL: choose(candidates): city rule c* = max(1, nights ÷ 3); cheapest within budget, trying c*, c*−1…1, then c*+1
+    B->>SEL: choose(candidates): city rule c* = max(1, nights ÷ 3), cheapest within budget, trying c*, c*−1…1, then c*+1
     alt one fits the budget
         SEL-->>B: PACKAGE
     else none fits
@@ -223,7 +223,7 @@ sequenceDiagram
     loop each candidate
         O->>SE: apply_change on a copy
         O->>V: validate(copy)
-        Note over O: keep only valid ones; price_diff = new total − current total
+        Note over O: keep only valid ones, price_diff = new total − current total
     end
     O-->>FE: options with price_diff, details, side effects
     User->>FE: search / sort / filter, then Select
